@@ -44,9 +44,11 @@ function validateIngredients(): boolean{
         </header>
 
         <main>
-            <IngredientsTable ref="ingredientsTable"/>
-            <button @click="ingredientsTable?.addIngredient()">+ Add Ingredient</button>
-            <button @click="generateDishes">Generate</button>
+            <div>
+                <IngredientsTable ref="ingredientsTable"/>
+                <button id="add-ingredient" @click="ingredientsTable?.addIngredient()">+ Add Ingredient</button>
+            </div>
+            <button id="generate-dishes" @click="generateDishes">Generate Dishes</button>
         </main>
     </div>
 </template>
@@ -59,5 +61,22 @@ function validateIngredients(): boolean{
     justify-content: center;
     align-items: center;
     min-height: inherit;
+}
+main{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 4rem;
+   max-width: 35rem;
+   width: 100%;
+}
+main > div{
+    width: 100%;
+}
+#add-ingredient{
+    width: 100%;
+}
+#generate-dishes{
+    width: fit-content;
 }
 </style>

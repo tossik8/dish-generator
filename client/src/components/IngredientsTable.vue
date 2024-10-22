@@ -39,11 +39,15 @@ defineExpose({
             <tbody>
                 <tr v-for="(ingredient, index) in ingredients" :key="index">
                     <td>
-                        <input v-model="ingredient.name" type="text" placeholder="Ingredient name">
+                        <input v-model="ingredient.name" name="ingredient-name" type="text" placeholder="Ingredient name">
                         <p :id="`error-${index}`" class="hidden error">Ingredient name is required</p>
                     </td>
-                    <td><input v-model="ingredient.quanity"type="text" placeholder="Quantity"></td>
-                    <td><button @click="removeIngredient(index)">X</button></td>
+                    <td>
+                        <input v-model="ingredient.quanity" type="text" name="ingredient-quantity" placeholder="Quantity">
+                    </td>
+                    <td>
+                        <button @click="removeIngredient(index)">X</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -52,13 +56,19 @@ defineExpose({
 
 <style scoped>
 .table-wrapper{
-    min-height: 10rem;
-    max-height: 10rem;
+    min-height: 15rem;
+    max-height: 15rem;
     overflow-y: auto;
+    width: 100%;
+}
+
+table{
+    background-color: black;
+    border-spacing: 0.5rem;
 }
 
 tr{
-    vertical-align: top;
+    vertical-align: baseline;
 }
 
 td:nth-of-type(1){
@@ -67,12 +77,14 @@ td:nth-of-type(1){
 
 td input{
     width: 100%;
+    padding: 1rem;
 }
 
 .error{
     color: red;
+    font-size: 0.8rem;
 }
 .hidden{
-    visibility: hidden;
+    display: none;
 }
 </style>
