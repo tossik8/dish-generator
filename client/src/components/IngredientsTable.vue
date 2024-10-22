@@ -3,14 +3,13 @@ import { nextTick, ref, type Ref } from 'vue';
 
 export type Ingredient = {
     name: string,
-    quanity: string
+    quanity?: string
 }
 const ingredients: Ref<Ingredient[]> = ref([])
 
 function addIngredient(): void{
     const ingredient: Ingredient = {
-        name: "",
-        quanity: ""
+        name: ""
     }
     ingredients.value.push(ingredient)
     scrollTableIntoView()
@@ -39,7 +38,10 @@ defineExpose({
         <table id="ingredients-table">
             <tbody>
                 <tr v-for="(ingredient, index) in ingredients" :key="index">
-                    <td><input v-model="ingredient.name" type="text" placeholder="Ingredient name"></td>
+                    <td>
+                        <input v-model="ingredient.name" type="text" placeholder="Ingredient name">
+                        <p :id="`error-${index}`" class="hidden error">Ingredient name is required</p>
+                    </td>
                     <td><input v-model="ingredient.quanity"type="text" placeholder="Quantity"></td>
                     <td><button @click="removeIngredient(index)">X</button></td>
                 </tr>
@@ -53,5 +55,24 @@ defineExpose({
     min-height: 10rem;
     max-height: 10rem;
     overflow-y: auto;
+}
+
+tr{
+    vertical-align: top;
+}
+
+td:nth-of-type(1){
+    width: 70%;
+}
+
+td input{
+    width: 100%;
+}
+
+.error{
+    color: red;
+}
+.hidden{
+    visibility: hidden;
 }
 </style>
