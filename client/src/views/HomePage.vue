@@ -7,25 +7,25 @@ type IngredientsTable = {
 }
 const ingredientsTable: Ref<IngredientsTable> = ref(null!)
 
-function generateDishes(): void{
+function generateDishes(): void {
     const valid = validateIngredients()
-    if(!valid){
+    if (!valid) {
         console.log('Invalid')
         return
     }
     console.log('Valid')
 }
 
-function validateIngredients(): boolean{
+function validateIngredients(): boolean {
     let error = false
     let i = 0
-    for(let ingredient of ingredientsTable.value.ingredients){
+    for (let ingredient of ingredientsTable.value.ingredients) {
         ingredient.name = ingredient.name.trim()
-        if(!ingredient.name){
+        if (!ingredient.name) {
             document.getElementById(`error-${i}`)?.classList.remove('table__error--hidden')
             error = true
         }
-        else{
+        else {
             document.getElementById(`error-${i}`)?.classList.add('table__error--hidden')
         }
         ++i
@@ -42,14 +42,14 @@ function validateIngredients(): boolean{
             <h2>List. Generate. Cook.</h2>
         </header>
         <main class="main">
-            <IngredientsTable ref="ingredientsTable"/>
+            <IngredientsTable ref="ingredientsTable" />
             <button @click="generateDishes">Generate Dishes</button>
         </main>
     </div>
 </template>
 
 <style scoped>
-.container{
+.container {
     display: flex;
     flex-direction: column;
     gap: 4rem;
@@ -57,12 +57,13 @@ function validateIngredients(): boolean{
     align-items: center;
     min-height: inherit;
 }
-.main{
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   gap: 4rem;
-   max-width: 35rem;
-   width: 100%;
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+    max-width: 35rem;
+    width: 100%;
 }
 </style>
