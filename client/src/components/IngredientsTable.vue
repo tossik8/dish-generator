@@ -1,10 +1,7 @@
 <script setup lang="ts">
+import type { Ingredient } from '@/interfaces';
 import { nextTick, ref, type Ref } from 'vue';
 
-export type Ingredient = {
-    name: string,
-    quanity?: string
-}
 const ingredients: Ref<Ingredient[]> = ref([])
 
 function addIngredient(): void{
