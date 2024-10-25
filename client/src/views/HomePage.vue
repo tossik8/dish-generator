@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import IngredientsTable, { type Ingredient } from '@/components/IngredientsTable.vue';
+import IngredientsTable from '@/components/IngredientsTable.vue';
+import type { Ingredient } from '@/interfaces';
 import { ref, type Ref } from 'vue';
 
 type IngredientsTable = {
