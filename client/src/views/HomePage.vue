@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import IngredientsList from '@/components/IngredientsList.vue';
-import type { Ingredient } from '@/interfaces';
+import type { Dish, Ingredient } from '@/interfaces';
 import { ref, type Ref } from 'vue';
 
 type IngredientsList = {
@@ -8,13 +8,37 @@ type IngredientsList = {
 }
 const ingredientsList: Ref<IngredientsList> = ref(null!)
 
-function generateDishes(): void {
+async function generateDishes(): Promise<void> {
     const valid = validateIngredients()
     if (!valid) {
-        console.log('Invalid')
         return
     }
-    console.log('Valid')
+    let dishes: Dish[]
+    try{
+        dishes = await fetchDishes()
+    }
+    catch(error){
+        console.error(error)
+        alert('Something went wrong. Try again.')
+        return
+    }
+}
+
+async function fetchDishes(): Promise<Dish[]> {
+    const response = await fetch(
+        "http://localhost:8000",
+        {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(ingredientsList.value.ingredients)
+        }
+    )
+    if(!response.ok){
+        throw new Error(`Error: ${response.status} - ${response.statusText}. URL: ${response.url}`)
+    }
+    return await response.json()
 }
 
 function validateIngredients(): boolean {
