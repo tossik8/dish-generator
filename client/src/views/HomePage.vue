@@ -8,22 +8,34 @@ type IngredientsList = {
 }
 const ingredientsList: Ref<IngredientsList> = ref(null!)
 
+/**
+ * Validates ingredients and, if valid, fetches dishes from the server.
+ * Shows an error message if fetching fails.
+ *
+ * @returns {Promise<void>}
+ */
 async function generateDishes(): Promise<void> {
     const valid = validateIngredients()
     if (!valid) {
         return
     }
     let dishes: Dish[]
-    try{
+    try {
         dishes = await fetchDishes()
     }
-    catch(error){
+    catch (error) {
         console.error(error)
         alert('Something went wrong. Try again.')
         return
     }
 }
 
+/**
+ * Fetches dishes based on ingredients from the server.
+ *
+ * @returns {Promise<Dish[]>} Resolves with a list of `Dish` objects.
+ * @throws {Error} if the response is not successful.
+ */
 async function fetchDishes(): Promise<Dish[]> {
     const response = await fetch(
         "http://localhost:8000",
@@ -35,12 +47,17 @@ async function fetchDishes(): Promise<Dish[]> {
             body: JSON.stringify(ingredientsList.value.ingredients)
         }
     )
-    if(!response.ok){
+    if (!response.ok) {
         throw new Error(`Error: ${response.status} - ${response.statusText}. URL: ${response.url}`)
     }
     return await response.json()
 }
 
+/**
+ * Checks that each ingredient has a name.
+ *
+ * @returns {boolean} `true` if all ingredients are valid.
+ */
 function validateIngredients(): boolean {
     let error = false
     let i = 0

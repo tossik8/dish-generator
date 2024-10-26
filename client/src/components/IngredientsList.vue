@@ -4,6 +4,12 @@ import { nextTick, ref, type Ref } from 'vue';
 
 const ingredients: Ref<Ingredient[]> = ref([])
 
+/**
+ * Adds a new, empty ingredient to the list.
+ * After adding, automatically scrolls the list to make the new entry visible.
+ *
+ * @returns {void}
+ */
 function addIngredient(): void {
     const ingredient: Ingredient = {
         name: ""
@@ -12,7 +18,12 @@ function addIngredient(): void {
     scrollTableIntoView()
 }
 
-function scrollTableIntoView() {
+/**
+ * Scrolls the ingredients list smoothly to the latest entry.
+ *
+ * @returns {void}
+ */
+function scrollTableIntoView(): void {
     const ingredients = document.getElementsByClassName("ingredients")[0]
     nextTick(() => {
         ingredients.scroll({
@@ -23,6 +34,12 @@ function scrollTableIntoView() {
     })
 }
 
+/**
+ * Removes an ingredient from the list by index.
+ *
+ * @param {number} index - The position of the ingredient to remove.
+ * @returns {void}
+ */
 function removeIngredient(index: number): void {
     ingredients.value.splice(index, 1)
 }
@@ -37,19 +54,38 @@ defineExpose({
         <ul class="ingredients">
             <li v-for="(ingredient, index) in ingredients" :key="index">
                 <div class="ingredients__container">
-                    <input class="ingredients__input" v-model="ingredient.name" name="ingredient-name" type="text"
-                        placeholder="Ingredient name">
-                    <input class="ingredients__input ingredients__input--short" v-model="ingredient.quanity" type="text"
-                        name="ingredient-quantity" placeholder="Quantity">
-                    <button class="ingredients__button ingredients__button--remove" @click="removeIngredient(index)">
+                    <input
+                        class="ingredients__input"
+                        v-model="ingredient.name"
+                        name="ingredient-name"
+                        type="text"
+                        placeholder="Ingredient name"
+                    />
+                    <input
+                        class="ingredients__input ingredients__input--short"
+                        v-model="ingredient.quanity"
+                        type="text"
+                        name="ingredient-quantity"
+                        placeholder="Quantity"
+                    />
+                    <button
+                        class="ingredients__button ingredients__button--remove"
+                        @click="removeIngredient(index)">
                         <font-awesome-icon :icon="['fas', 'trash']" />
                     </button>
                 </div>
-                <p :id="`error-${index}`" class="ingredients__error ingredients__error--hidden">Ingredient name is
-                    required</p>
+                <p
+                    :id="`error-${index}`"
+                    class="ingredients__error ingredients__error--hidden">
+                    Ingredient name is required
+                </p>
             </li>
             <li class="ingredients__item--add">
-                <button class="ingredients__button ingredients__button--add" @click="addIngredient()">+ Add Ingredient</button>
+                <button
+                    class="ingredients__button ingredients__button--add"
+                    @click="addIngredient()">
+                    + Add Ingredient
+                </button>
             </li>
         </ul>
     </div>
@@ -105,7 +141,7 @@ defineExpose({
     display: none;
 }
 
-.ingredients__button{
+.ingredients__button {
     cursor: pointer;
 }
 
