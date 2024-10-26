@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import IngredientsTable from '@/components/IngredientsTable.vue';
+import IngredientsList from '@/components/IngredientsList.vue';
 import type { Ingredient } from '@/interfaces';
 import { ref, type Ref } from 'vue';
 
-type IngredientsTable = {
+type IngredientsList = {
     ingredients: Ingredient[]
 }
-const ingredientsTable: Ref<IngredientsTable> = ref(null!)
+const ingredientsList: Ref<IngredientsList> = ref(null!)
 
 function generateDishes(): void {
     const valid = validateIngredients()
@@ -20,14 +20,14 @@ function generateDishes(): void {
 function validateIngredients(): boolean {
     let error = false
     let i = 0
-    for (let ingredient of ingredientsTable.value.ingredients) {
+    for (let ingredient of ingredientsList.value.ingredients) {
         ingredient.name = ingredient.name.trim()
         if (!ingredient.name) {
-            document.getElementById(`error-${i}`)?.classList.remove('table__error--hidden')
+            document.getElementById(`error-${i}`)?.classList.remove('ingredients__error--hidden')
             error = true
         }
         else {
-            document.getElementById(`error-${i}`)?.classList.add('table__error--hidden')
+            document.getElementById(`error-${i}`)?.classList.add('ingredients__error--hidden')
         }
         ++i
     }
@@ -43,7 +43,7 @@ function validateIngredients(): boolean {
             <h2>List. Generate. Cook.</h2>
         </header>
         <main class="main">
-            <IngredientsTable ref="ingredientsTable" />
+            <IngredientsList ref="ingredientsList" />
             <button @click="generateDishes">Generate Dishes</button>
         </main>
     </div>
@@ -57,6 +57,7 @@ function validateIngredients(): boolean {
     justify-content: center;
     align-items: center;
     min-height: inherit;
+    padding: 0 0.5rem;
 }
 
 .main {
