@@ -79,13 +79,13 @@ function validateIngredients(): boolean {
 
 <template>
     <div class="container">
-        <header>
-            <h1>Dish Generator</h1>
-            <h2>List. Generate. Cook.</h2>
+        <header class="header">
+            <h1 class="header__title">Dish Generator</h1>
+            <h2 class="header__slogan">List. Generate. Cook.</h2>
         </header>
         <main class="main">
             <IngredientsList ref="ingredientsList" />
-            <button @click="generateDishes">Generate Dishes</button>
+            <button class="main__button" @click="generateDishes">Generate Dishes</button>
         </main>
     </div>
 </template>
@@ -101,6 +101,18 @@ function validateIngredients(): boolean {
     padding: 0 0.5rem;
 }
 
+.header{
+    text-align: center;
+}
+
+.header__title{
+    color: var(--md-sys-color-primary);
+}
+
+.header__slogan{
+    color: var(--md-sys-color-secondary);
+}
+
 .main {
     display: flex;
     flex-direction: column;
@@ -108,5 +120,14 @@ function validateIngredients(): boolean {
     gap: 4rem;
     max-width: 35rem;
     width: 100%;
+}
+
+.main__button{
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    cursor: pointer;
+    border: none;
+    padding: 1rem;
+    border-radius: 2rem;
 }
 </style>

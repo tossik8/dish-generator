@@ -71,7 +71,10 @@ defineExpose({
                     <button
                         class="ingredients__button ingredients__button--remove"
                         @click="removeIngredient(index)">
-                        <font-awesome-icon :icon="['fas', 'trash']" />
+                        <font-awesome-icon
+                            :icon="['fas', 'trash']"
+                            class="trash-icon"
+                        />
                     </button>
                 </div>
                 <p
@@ -93,7 +96,7 @@ defineExpose({
 
 <style scoped>
 .ingredients-container {
-    background-color: black;
+    background-color: var(--md-sys-color-on-background);
     padding: 0.5rem;
     width: inherit;
 }
@@ -108,7 +111,6 @@ defineExpose({
     flex-direction: column;
     gap: 0.5rem;
     padding-inline-start: 0;
-    padding-right: 0.5rem;
 }
 
 .ingredients__item--add {
@@ -126,6 +128,7 @@ defineExpose({
 .ingredients__input {
     width: 100%;
     padding: 1rem;
+    caret-color: var(--md-sys-color-primary);
 }
 
 .ingredients__input--short {
@@ -133,7 +136,7 @@ defineExpose({
 }
 
 .ingredients__error {
-    color: red;
+    color: var(--md-sys-color-error);
     font-size: 0.8rem;
 }
 
@@ -147,11 +150,19 @@ defineExpose({
 
 .ingredients__button--remove {
     padding: 0 0.5rem;
-    background-color: red;
+    background-color: var(--md-sys-color-error);
     border: none;
 }
 
 .ingredients__button--add {
     width: 100%;
+    background-color: var(--md-sys-color-secondary);
+    color: var(--md-sys-color-on-secondary);
+    border: none;
+    padding: 1rem;
+}
+
+.trash-icon{
+    color: var(--md-sys-color-on-error);
 }
 </style>
