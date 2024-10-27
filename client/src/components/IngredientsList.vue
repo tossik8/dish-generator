@@ -5,8 +5,17 @@ import { nextTick, ref, type Ref } from 'vue';
 const ingredients: Ref<Ingredient[]> = ref([])
 
 /**
+ * Handles the click event to add a new ingredient and scroll the list into view.
+ *
+ * @returns {void}
+ */
+function handleAddIngredientClick(): void {
+    addIngredient()
+    scrollListIntoView()
+}
+
+/**
  * Adds a new, empty ingredient to the list.
- * After adding, automatically scrolls the list to make the new entry visible.
  *
  * @returns {void}
  */
@@ -15,7 +24,6 @@ function addIngredient(): void {
         name: ""
     }
     ingredients.value.push(ingredient)
-    scrollTableIntoView()
 }
 
 /**
@@ -23,7 +31,7 @@ function addIngredient(): void {
  *
  * @returns {void}
  */
-function scrollTableIntoView(): void {
+function scrollListIntoView(): void {
     const ingredients = document.getElementsByClassName("ingredients")[0]
     nextTick(() => {
         ingredients.scroll({
@@ -86,7 +94,7 @@ defineExpose({
             <li class="ingredients__item--add">
                 <button
                     class="ingredients__button ingredients__button--add"
-                    @click="addIngredient()">
+                    @click="handleAddIngredientClick()">
                     + Add Ingredient
                 </button>
             </li>
