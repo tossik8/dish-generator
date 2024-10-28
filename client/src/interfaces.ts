@@ -1,5 +1,5 @@
 export interface Ingredient {
-    name: string,
+    name: string
     quanity?: string
 }
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { Ingredient } from '@/interfaces';
-import { nextTick, ref, type Ref } from 'vue';
+import type { Ingredient } from "@/interfaces"
+import { nextTick, ref, type Ref } from "vue"
 
 const ingredients: Ref<Ingredient[]> = ref([])
 
@@ -37,7 +37,7 @@ function scrollListIntoView(): void {
         ingredients.scroll({
             top: ingredients.scrollHeight,
             left: 0,
-            behavior: 'smooth'
+            behavior: "smooth"
         })
     })
 }
@@ -78,7 +78,8 @@ defineExpose({
                     />
                     <button
                         class="ingredients__button ingredients__button--remove"
-                        @click="removeIngredient(index)">
+                        @click="removeIngredient(index)"
+                    >
                         <font-awesome-icon
                             :icon="['fas', 'trash']"
                             class="trash-icon"
@@ -87,14 +88,16 @@ defineExpose({
                 </div>
                 <p
                     :id="`error-${index}`"
-                    class="ingredients__error ingredients__error--hidden">
+                    class="ingredients__error ingredients__error--hidden"
+                >
                     Ingredient name is required
                 </p>
             </li>
             <li class="ingredients__item--add">
                 <button
                     class="ingredients__button ingredients__button--add"
-                    @click="handleAddIngredientClick()">
+                    @click="handleAddIngredientClick"
+                >
                     + Add Ingredient
                 </button>
             </li>
@@ -170,7 +173,7 @@ defineExpose({
     padding: 1rem;
 }
 
-.trash-icon{
+.trash-icon {
     color: var(--md-sys-color-on-error);
 }
 </style>
