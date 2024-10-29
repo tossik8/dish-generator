@@ -18,4 +18,5 @@ class OutputRecipe(BaseModel):
     description: str
     image: str
     ingredients: List[DtoIngredient]
+    instructions: List[str]
 
