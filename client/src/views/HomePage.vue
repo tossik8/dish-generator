@@ -22,6 +22,7 @@ async function generateDishes(): Promise<void> {
     let dishes: Dish[]
     try {
         dishes = await fetchDishes()
+        console.log(dishes)
     } catch (error) {
         console.error(error)
         alert("Something went wrong. Try again.")
@@ -36,7 +37,7 @@ async function generateDishes(): Promise<void> {
  * @throws {Error} if the response is not successful.
  */
 async function fetchDishes(): Promise<Dish[]> {
-    const response = await fetch("http://localhost:8000", {
+    const response = await fetch("http://localhost:8000/gen_recipies", {
         method: "POST",
         headers: {
             "Content-type": "application/json"
