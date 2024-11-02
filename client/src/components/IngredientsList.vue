@@ -71,7 +71,7 @@ defineExpose({
                     />
                     <input
                         class="ingredients__input ingredients__input--short"
-                        v-model="ingredient.quanity"
+                        v-model="ingredient.quantity"
                         type="text"
                         name="ingredient-quantity"
                         placeholder="Quantity"

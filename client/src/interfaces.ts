@@ -1,6 +1,6 @@
 export interface Ingredient {
     name: string
-    quanity?: string
+    quantity?: string
 }
 
 export interface Dish {
