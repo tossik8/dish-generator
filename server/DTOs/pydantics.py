@@ -1,10 +1,10 @@
-from typing import List
+from typing import List, Optional
 
 from pydantic import BaseModel
 
 class DtoIngredient(BaseModel):
     name: str
-    quantity: str
+    quantity: Optional[str]
 
     def to_llm_input_format(self) -> str:
         resp=self.name
