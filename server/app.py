@@ -2,9 +2,9 @@ from typing import List
 
 import uvicorn
 
-from DTOs import DtoIngredient, OutputRecipe
+from server.DTOs import DtoIngredient, OutputRecipe
 from fastapi import FastAPI, Request
-from RecipeModel import generate
+from server.RecipeModel import generate
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -25,6 +25,7 @@ app.add_middleware(
 async def gen_recipies(ingredients: List[DtoIngredient]) -> list[OutputRecipe]:
     ingredients:List[str] = [i.to_llm_input_format() for i in ingredients]
     return await generate(ingredients)
-
+# call from root:
+# !python3 -m server.app
 if __name__ == "__main__":
-    uvicorn.run("app:app", host="localhost", port=8000, reload=True)
+    uvicorn.run("server.app:app", host="localhost", port=8000, reload=True)
