@@ -28,4 +28,4 @@ async def gen_recipies(ingredients: List[DtoIngredient]) -> list[OutputRecipe]:
 # call from root:
 # !python3 -m server.app
 if __name__ == "__main__":
-    uvicorn.run("server.app:app", host="localhost", port=8000, reload=True)
+    uvicorn.run("server.app:app", host="0.0.0.0", port=8000, reload=True)
