@@ -61,9 +61,7 @@ async def generate_dummy(ingredients: List[str]) -> list[OutputRecipe]:
     )
 
 async def generate(ingredients: List[str]) -> Stream:
-    print(("=" * 80) + "|Generating Recipies|" + ("=" * 80))
-    print("Input:")
-    print(json.dumps(ingredients, indent=4))
+
     print("-" * 181)
     ingredients = ", ".join(ingredients)
     prompt = '''I have following items: input_ingredients

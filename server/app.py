@@ -1,3 +1,4 @@
+import json
 from typing import List
 
 import uvicorn
@@ -26,11 +27,17 @@ app.add_middleware(
 @app.post("/gen_recipies_real")
 async def gen_recipies_real(ingredients: List[DtoIngredient]) -> str:
     ingredients:List[str] = [i.to_llm_input_format() for i in ingredients]
+    print(("=" * 80) + "|Generating Recipies|" + ("=" * 80))
+    print("Input:")
+    print(json.dumps(ingredients, indent=4))
     resp=await generate(ingredients)
     payload=""
     for i in resp:
         payload+=i.choices[0].delta.content or ""
+    print("-" * 181)
+    print("Output:")
     print(payload)
+    print(("=" * 83) + "|Recipies Sent|" + ("=" * 83))
     return payload
 
 
