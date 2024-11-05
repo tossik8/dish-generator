@@ -21,7 +21,8 @@ function handleAddIngredientClick(): void {
  */
 function addIngredient(): void {
     const ingredient: Ingredient = {
-        name: ""
+        name: "",
+        quantity: ""
     }
     ingredients.value.push(ingredient)
 }

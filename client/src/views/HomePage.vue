@@ -24,7 +24,6 @@ async function generateDishes(): Promise<void> {
         dishes = await fetchDishes()
         console.log(dishes)
     } catch (error) {
-        console.error(error)
         alert("Something went wrong. Try again.")
         return
     }
@@ -46,7 +45,7 @@ async function fetchDishes(): Promise<Dish[]> {
     })
     if (!response.ok) {
         throw new Error(
-            `Error: ${response.status} - ${response.statusText}. URL: ${response.url}`
+            `${response.status} - ${response.statusText}. URL: ${response.url}`
         )
     }
     return await response.json()
