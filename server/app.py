@@ -7,6 +7,8 @@ from fastapi import FastAPI, Request
 from server.RecipeModel import generate
 from fastapi.middleware.cors import CORSMiddleware
 
+from server.RecipeModel.Gen import generate_dummy
+
 app = FastAPI()
 
 origins = [
@@ -21,10 +23,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.post("/gen_recipies_real")
+async def gen_recipies_real(ingredients: List[DtoIngredient]) -> str:
+    ingredients:List[str] = [i.to_llm_input_format() for i in ingredients]
+    resp=await generate(ingredients)
+    payload=""
+    for i in resp:
+        payload+=i.choices[0].delta.content or ""
+    print(payload)
+    return payload
+
+
 @app.post("/gen_recipies")
 async def gen_recipies(ingredients: List[DtoIngredient]) -> list[OutputRecipe]:
     ingredients:List[str] = [i.to_llm_input_format() for i in ingredients]
-    return await generate(ingredients)
+    return await generate_dummy(ingredients)
 # call from root:
 # !python3 -m server.app
 if __name__ == "__main__":
