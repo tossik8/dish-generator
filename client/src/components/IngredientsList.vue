@@ -27,16 +27,17 @@ function addIngredient(): void {
     ingredients.value.push(ingredient)
 }
 
+const ingredientsList = ref<HTMLUListElement>(null!)
+
 /**
  * Scrolls the ingredients list smoothly to the latest entry.
  *
  * @returns {void}
  */
 function scrollListIntoView(): void {
-    const ingredients = document.getElementsByClassName("ingredients")[0]
     nextTick(() => {
-        ingredients.scroll({
-            top: ingredients.scrollHeight,
+        ingredientsList.value.scroll({
+            top: ingredientsList.value.scrollHeight,
             left: 0,
             behavior: "smooth"
         })
@@ -60,7 +61,7 @@ defineExpose({
 
 <template>
     <div class="ingredients-container">
-        <ul class="ingredients">
+        <ul class="ingredients" ref="ingredientsList">
             <li v-for="(ingredient, index) in ingredients" :key="index">
                 <div class="ingredients__container">
                     <input

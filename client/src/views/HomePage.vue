@@ -57,7 +57,7 @@ async function fetchDishes(): Promise<Dish[]> {
  * @returns {boolean} `true` if all ingredients are valid.
  */
 function validateIngredients(): boolean {
-    if(ingredientsList.value.ingredients.length === 0) {
+    if (ingredientsList.value.ingredients.length === 0) {
         return true
     }
     let error = false
