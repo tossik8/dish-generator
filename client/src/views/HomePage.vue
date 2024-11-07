@@ -15,8 +15,7 @@ const ingredientsList: Ref<IngredientsList> = ref(null!)
  * @returns {Promise<void>}
  */
 async function generateDishes(): Promise<void> {
-    const valid = validateIngredients()
-    if (!valid) {
+    if (!validateIngredients()) {
         return
     }
     let dishes: Dish[]
@@ -52,30 +51,28 @@ async function fetchDishes(): Promise<Dish[]> {
 }
 
 /**
- * Checks that each ingredient has a name.
+ * Validates a list of ingredients.
+ *
+ * Iterates over each ingredient, trims whitespace, and checks if the name is empty.
+ * Updates error message visibility accordingly.
  *
  * @returns {boolean} `true` if all ingredients are valid.
  */
 function validateIngredients(): boolean {
     if (ingredientsList.value.ingredients.length === 0) {
-        return true
+        return false
     }
     let error = false
-    let i = 0
-    for (let ingredient of ingredientsList.value.ingredients) {
+    ingredientsList.value.ingredients.forEach((ingredient, index) => {
         ingredient.name = ingredient.name.trim()
-        if (!ingredient.name) {
-            document
-                .getElementById(`error-${i}`)
-                ?.classList.remove("ingredients__error--hidden")
+        const hasName = Boolean(ingredient.name)
+        if (!hasName) {
             error = true
-        } else {
-            document
-                .getElementById(`error-${i}`)
-                ?.classList.add("ingredients__error--hidden")
         }
-        ++i
-    }
+        document
+            .getElementById(`error-${index}`)
+            ?.classList.toggle("ingredients__error--hidden", hasName)
+    })
     return !error
 }
 </script>
