@@ -13,7 +13,9 @@ describe("IngredientsList.vue", () => {
     })
 
     test("add ingredients", async () => {
-        const addButton = wrapper.find("button.ingredients__button--add")
+        const addButton = wrapper.find(
+            "button.ingredients__button--add"
+        ) as DOMWrapper<HTMLButtonElement>
         const count = 10
         await clickButton(addButton, count)
 
@@ -22,11 +24,15 @@ describe("IngredientsList.vue", () => {
     })
 
     test("remove ingredients", async () => {
-        const addButton = wrapper.find("button.ingredients__button--add")
+        const addButton = wrapper.find(
+            "button.ingredients__button--add"
+        ) as DOMWrapper<HTMLButtonElement>
         const addCount = 10
         await clickButton(addButton, addCount)
 
-        const removeButton = wrapper.find("button.ingredients__button--remove")
+        const removeButton = wrapper.find(
+            "button.ingredients__button--remove"
+        ) as DOMWrapper<HTMLButtonElement>
         const removeCount = 3
         await clickButton(removeButton, removeCount)
 
@@ -34,12 +40,18 @@ describe("IngredientsList.vue", () => {
     })
 
     test("enter the ingredient information", async () => {
-        const addButton = wrapper.find("button.ingredients__button--add")
-        await clickButton(addButton, 1)
+        const addButton = wrapper.find(
+            "button.ingredients__button--add"
+        ) as DOMWrapper<HTMLButtonElement>
+        await clickButton(addButton)
 
-        const ingredientNameInput = wrapper.find("input[name=ingredient-name]")
         // prettier-ignore
-        const ingredientQuantityInput = wrapper.find("input[name=ingredient-quantity]")
+        const ingredientNameInput = wrapper.find(
+            "input[name=ingredient-name]"
+        )
+        const ingredientQuantityInput = wrapper.find(
+            "input[name=ingredient-quantity]"
+        )
 
         // prettier-ignore
         expect((ingredientNameInput.element as HTMLInputElement).value).toBe("")
@@ -57,9 +69,16 @@ describe("IngredientsList.vue", () => {
         expect((ingredientQuantityInput.element as HTMLInputElement).value).toBe(ingredientQuantity)
     })
 
+    /**
+     * Triggers a specified button click a given number of times.
+     *
+     * @param {DOMWrapper<HTMLButtonElement>} button - The button DOM wrapper to be clicked.
+     * @param {number} [count=1] - The number of times to click the button. Defaults to 1 if not specified.
+     * @returns {Promise<void>} - A promise that resolves when all clicks are completed.
+     */
     async function clickButton(
-        button: DOMWrapper<Element>,
-        count: number
+        button: DOMWrapper<HTMLButtonElement>,
+        count: number = 1
     ): Promise<void> {
         for (let i = 0; i < count; ++i) {
             await button.trigger("click")
